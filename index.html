@@ -1,0 +1,252 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0d1b2a;height:100vh;overflow:hidden}
+.wrap{display:flex;flex-direction:column;height:100vh}
+.slides{flex:1;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;background:#fff}
+.slide.active{display:flex}
+.hero{background:linear-gradient(135deg,#1B3A5C 0%,#0d2137 55%,#7D1F2E 100%);justify-content:center;align-items:center;text-align:center;gap:10px}
+.hero .big-icon{font-size:52px;margin-bottom:6px}
+.hero h1{color:#fff;font-size:30px;font-weight:700;line-height:1.35;max-width:680px}
+.hero .sub{color:#C8973E;font-size:15px;line-height:1.6;max-width:580px;margin-top:4px}
+.gold-bar{width:72px;height:3px;background:#C8973E;margin:14px auto}
+.hero .foot{color:rgba(255,255,255,.4);font-size:11px;margin-top:28px}
+.sh{background:#1B3A5C;color:#fff;padding:14px 32px;border-bottom:4px solid #C8973E;flex-shrink:0}
+.sh h2{font-size:19px;font-weight:600}
+.sh p{font-size:12px;opacity:.7;margin-top:3px}
+.sc{flex:1;padding:18px 32px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{background:linear-gradient(135deg,#1B3A5C,#264f78);border-radius:10px;padding:18px 14px;text-align:center;color:#fff;border-bottom:4px solid #C8973E}
+.kpi .val{font-size:40px;font-weight:700;color:#C8973E}
+.kpi .lbl{font-size:12px;opacity:.8;margin-top:4px}
+.cw{position:relative;height:330px;width:100%}
+.ib{background:#EFF6FF;border-left:4px solid #1B3A5C;border-radius:4px;padding:11px 15px;font-size:12.5px;color:#2c3e50}
+.ib h4{font-size:12.5px;font-weight:700;margin-bottom:5px;color:#1B3A5C}
+.ii{display:flex;align-items:flex-start;gap:14px;background:#F8F9FA;border-radius:8px;padding:13px;border-left:4px solid #C8973E}
+.ii .ico{font-size:26px;flex-shrink:0}
+.ii h3{font-size:14px;color:#1B3A5C;margin-bottom:3px;font-weight:600}
+.ii p{font-size:12.5px;color:#555}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:9px 22px;background:#1B3A5C;flex-shrink:0}
+.nbtn{background:#C8973E;border:none;color:#fff;padding:7px 18px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600}
+.nbtn:disabled{opacity:.3;cursor:not-allowed}
+.ndots{display:flex;gap:6px;align-items:center}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer}
+.dot.active{background:#C8973E}
+.ninfo{color:#fff;font-size:12px;opacity:.7;margin-left:8px}
+</style>
+
+<div class="wrap">
+<div class="slides">
+
+<!-- S1: TITLE -->
+<div class="slide hero active" id="s0">
+  <div class="big-icon">📊</div>
+  <h1>Queensland (QLD) Database<br>Regional Breakdown Report</h1>
+  <div class="gold-bar"></div>
+  <div class="sub">Client Distribution · MMM Classification · Supervision<br>Sponsorship &amp; Billing Analysis</div>
+  <div class="foot">Data sourced from QLD Database &nbsp;|&nbsp; April 2026</div>
+</div>
+
+<!-- S2: OVERVIEW -->
+<div class="slide" id="s1">
+  <div class="sh"><h2>Queensland Database — Snapshot</h2><p>Executive Summary &amp; Key Statistics</p></div>
+  <div class="sc">
+    <div class="kpi-row">
+      <div class="kpi"><div class="val">636</div><div class="lbl">Total Clients</div></div>
+      <div class="kpi"><div class="val">281</div><div class="lbl">Signed Clients</div></div>
+      <div class="kpi"><div class="val">188</div><div class="lbl">Not Signed</div></div>
+      <div class="kpi"><div class="val">167</div><div class="lbl">Remaining / Other</div></div>
+    </div>
+    <div class="cw" style="height:240px"><canvas id="c_overview"></canvas></div>
+  </div>
+</div>
+
+<!-- S3: MMM -->
+<div class="slide" id="s2">
+  <div class="sh"><h2>MMM Classification — Regional Distribution</h2><p>Remoteness classification (MMM2–MMM7) across 7 Queensland regions</p></div>
+  <div class="sc">
+    <div class="cw"><canvas id="c_mmm"></canvas></div>
+    <div class="ib"><h4>Regional Totals</h4>Brisbane North: 43 &nbsp;|&nbsp; Brisbane South: 12 &nbsp;|&nbsp; Central QL / Wide Bay / Sunshine Coast: 167 &nbsp;|&nbsp; Darling Downs &amp; West Moreton: 74 &nbsp;|&nbsp; Gold Coast: 0 &nbsp;|&nbsp; Northern QL: 299 &nbsp;|&nbsp; Western QL: 41 &nbsp;|&nbsp; <strong>Total: 636</strong></div>
+  </div>
+</div>
+
+<!-- S4: SIGNED -->
+<div class="slide" id="s3">
+  <div class="sh"><h2>Signed vs. Not Signed Clients — Regional Breakdown</h2><p>Client engagement status across all regions</p></div>
+  <div class="sc">
+    <div class="cw"><canvas id="c_signed"></canvas></div>
+    <div class="ib"><h4>Totals</h4>Signed: 281 &nbsp;|&nbsp; Not Signed: 188 &nbsp;|&nbsp; Remaining / Other: 167 &nbsp;|&nbsp; <strong>Total: 636</strong> &nbsp;&nbsp;— Darling Downs &amp; West Moreton signed/not signed data is pending.</div>
+  </div>
+</div>
+
+<!-- S5: SUPERVISION -->
+<div class="slide" id="s4">
+  <div class="sh"><h2>Supervision Provided — Regional Breakdown</h2><p>Supervision levels and engagement status across regions</p></div>
+  <div class="sc">
+    <div class="cw"><canvas id="c_super"></canvas></div>
+    <div class="ib"><h4>Totals</h4>Level 1: 0 &nbsp;|&nbsp; Level 2: 2 &nbsp;|&nbsp; Level 3: 8 &nbsp;|&nbsp; No Supervision: 24 &nbsp;|&nbsp; Follow-up: 165 &nbsp;|&nbsp; Not Interested: 262</div>
+  </div>
+</div>
+
+<!-- S6: SPONSORSHIP -->
+<div class="slide" id="s5">
+  <div class="sh"><h2>Sponsorship Provided — Regional Breakdown</h2><p>Visa sponsorship types and engagement status by region</p></div>
+  <div class="sc">
+    <div class="cw"><canvas id="c_sponsor"></canvas></div>
+    <div class="ib"><h4>Totals</h4>482 Visa: 4 &nbsp;|&nbsp; 186 Visa: 1 &nbsp;|&nbsp; No Sponsorship: 24 &nbsp;|&nbsp; Follow-up: 165 &nbsp;|&nbsp; Not Interested: 262</div>
+  </div>
+</div>
+
+<!-- S7: BILLING -->
+<div class="slide" id="s6">
+  <div class="sh"><h2>Billing Type — Regional Breakdown</h2><p>Billing categories and engagement status across regions</p></div>
+  <div class="sc">
+    <div class="cw"><canvas id="c_billing"></canvas></div>
+    <div class="ib"><h4>Totals</h4>Bulk Billing: 4 &nbsp;|&nbsp; Mixed Billing: 1 &nbsp;|&nbsp; Private Billing: 24 &nbsp;|&nbsp; Follow-up: 165 &nbsp;|&nbsp; Not Interested: 262</div>
+  </div>
+</div>
+
+<!-- S8: THANK YOU -->
+<div class="slide hero" id="s7">
+  <div class="big-icon"></div>
+  <h1>Thank You</h1>
+  <div class="gold-bar"></div>
+  <div class="sub" style="font-size:18px">Questions &amp; Discussion</div>
+
+</div>
+
+</div>
+
+<div class="nav">
+  <button class="nbtn" id="prev" onclick="go(-1)" disabled>◀ Prev</button>
+  <div style="display:flex;align-items:center">
+    <div class="ndots" id="dots"></div>
+    <span class="ninfo" id="pg">1 / 8</span>
+  </div>
+  <button class="nbtn" id="next" onclick="go(1)">Next ▶</button>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script>
+const N='#1B3A5C',G='#C8973E',T='#2A9D8F',M='#7D1F2E',O='#E07B39',Y='#4E9F6E',B='#2A5F8F';
+const REGIONS=['Bris. North','Bris. South','Central QL','Darling Downs','Gold Coast','Northern QL','Western QL'];
+let cur=0;
+const slides=document.querySelectorAll('.slide');
+const tot=slides.length;
+const done={};
+
+const dotsEl=document.getElementById('dots');
+for(let i=0;i<tot;i++){
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n){
+  slides[cur].classList.remove('active');
+  dotsEl.children[cur].classList.remove('active');
+  cur=n;
+  slides[cur].classList.add('active');
+  dotsEl.children[cur].classList.add('active');
+  document.getElementById('pg').textContent=`${cur+1} / ${tot}`;
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===tot-1;
+  if(!done[cur]){done[cur]=1;setTimeout(()=>init(cur),60);}
+}
+function go(d){if(cur+d>=0&&cur+d<tot)goTo(cur+d);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')go(1);
+  if(e.key==='ArrowLeft')go(-1);
+});
+
+const hOpts=()=>({
+  indexAxis:'y',responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{position:'bottom',labels:{font:{size:11},boxWidth:12}}},
+  scales:{x:{stacked:true,ticks:{font:{size:11}}},y:{stacked:true,ticks:{font:{size:11}}}}
+});
+
+function init(i){
+  if(i===1)initOverview();
+  else if(i===2)initMMM();
+  else if(i===3)initSigned();
+  else if(i===4)initSuper();
+  else if(i===5)initSponsor();
+  else if(i===6)initBilling();
+}
+
+function initOverview(){
+  new Chart(document.getElementById('c_overview'),{
+    type:'doughnut',
+    data:{labels:['Signed (281)','Not Signed (188)','Remaining/Other (167)'],
+      datasets:[{data:[281,188,167],backgroundColor:[T,M,G],borderWidth:2,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{font:{size:12},boxWidth:14}}}}
+  });
+}
+
+function initMMM(){
+  new Chart(document.getElementById('c_mmm'),{
+    type:'bar',
+    data:{labels:REGIONS,datasets:[
+      {label:'MMM2',data:[41,4,91,30,0,45,0],backgroundColor:N},
+      {label:'MMM3',data:[0,0,34,0,0,0,0],backgroundColor:B},
+      {label:'MMM4',data:[0,4,7,14,0,29,3],backgroundColor:T},
+      {label:'MMM5',data:[2,2,30,29,0,33,0],backgroundColor:G},
+      {label:'MMM6',data:[0,2,5,1,0,10,10],backgroundColor:O},
+      {label:'MMM7',data:[0,0,0,0,0,182,28],backgroundColor:M},
+    ]},options:hOpts()
+  });
+}
+
+function initSigned(){
+  new Chart(document.getElementById('c_signed'),{
+    type:'bar',
+    data:{labels:REGIONS,datasets:[
+      {label:'Signed',data:[37,6,73,0,24,41,4],backgroundColor:T},
+      {label:'Not Signed',data:[10,6,83,0,54,89,37],backgroundColor:M},
+    ]},options:hOpts()
+  });
+}
+
+function initSuper(){
+  new Chart(document.getElementById('c_super'),{
+    type:'bar',
+    data:{labels:REGIONS,datasets:[
+      {label:'Level 1',data:[0,0,0,0,0,0,0],backgroundColor:'#0D47A1'},
+      {label:'Level 2',data:[1,0,1,0,0,0,0],backgroundColor:B},
+      {label:'Level 3',data:[2,1,2,1,0,2,0],backgroundColor:T},
+      {label:'No Supervision',data:[5,9,5,0,0,5,0],backgroundColor:Y},
+      {label:'Follow-up',data:[33,21,48,43,0,20,0],backgroundColor:G},
+      {label:'Not Interested',data:[100,38,32,31,0,23,38],backgroundColor:M},
+    ]},options:hOpts()
+  });
+}
+
+function initSponsor(){
+  new Chart(document.getElementById('c_sponsor'),{
+    type:'bar',
+    data:{labels:REGIONS,datasets:[
+      {label:'482 Visa',data:[0,0,4,0,0,0,0],backgroundColor:T},
+      {label:'186 Visa',data:[0,0,1,0,0,0,0],backgroundColor:B},
+      {label:'No Sponsorship',data:[5,9,5,0,0,5,0],backgroundColor:Y},
+      {label:'Follow-up',data:[33,21,48,43,0,20,0],backgroundColor:G},
+      {label:'Not Interested',data:[100,38,32,31,0,23,38],backgroundColor:M},
+    ]},options:hOpts()
+  });
+}
+
+function initBilling(){
+  new Chart(document.getElementById('c_billing'),{
+    type:'bar',
+    data:{labels:REGIONS,datasets:[
+      {label:'Bulk Billing',data:[0,0,4,0,0,0,0],backgroundColor:T},
+      {label:'Mixed Billing',data:[0,0,1,0,0,0,0],backgroundColor:B},
+      {label:'Private Billing',data:[5,9,5,0,0,5,0],backgroundColor:Y},
+      {label:'Follow-up',data:[33,21,48,43,0,20,0],backgroundColor:G},
+      {label:'Not Interested',data:[100,38,32,31,0,23,38],backgroundColor:M},
+    ]},options:hOpts()
+  });
+}
+</script>
